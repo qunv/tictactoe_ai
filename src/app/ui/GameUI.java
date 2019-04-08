@@ -31,7 +31,7 @@ public class GameUI extends JFrame {
         this.txtComputerWin.setEnabled(false);
         this.txtPlayerWin.setEnabled(false);
         this.txtRound.setEnabled(false);
-        JOptionPane.showMessageDialog(null, "If you wanna know my crush. Let's win computer.");
+        JOptionPane.showMessageDialog(null, "You can choose number of plays at selected option.Let's win computer.");
     }
 
     public GameUI(){
