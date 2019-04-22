@@ -50,7 +50,7 @@ public class Position {
         return new Position();
     }
 
-    private Integer[] possibleMoves() {
+    public Integer[] possibleMoves() {
         List<Integer> list = new LinkedList<Integer>();
         for(int i = 0; i < board.length; i++) {
             if(board[i] == ' ') {
@@ -89,13 +89,11 @@ public class Position {
         return false;
     }
 
-    private int minimax() {
+    public int minimax() {
         if(win(Constant.X)) {
-//            System.out.println(new String(board) + " == win x");
             return 100;
         }
         if(win(Constant.O)) {
-//            System.out.println(new String(board) + " == win o");
             return -100;
         }
         if(possibleMoves().length == 0) return 0;
@@ -113,20 +111,20 @@ public class Position {
         return mmUpdated;
     }
 
-    public int bestMove() {
-        Integer mm = null;
-        int best = -1;
-        Integer[] possibleMoves = possibleMoves();
-        for(Integer idx : possibleMoves) {
-            Integer value = move(idx).minimax();
-            if(mm == null || turn == Constant.X && mm < value || turn == Constant.O && value < mm) {
-                mm = value;
-                best = idx;
-            }
-            //System.out.println(value);
-        }
-        return best;
-    }
+//    public int bestMove() {
+//        Integer mm = null;
+//        int best = -1;
+//        Integer[] possibleMoves = possibleMoves();
+//        for(Integer idx : possibleMoves) {
+//            Integer value = move(idx).minimax();
+//            if(mm == null || turn == Constant.X && mm < value || turn == Constant.O && value < mm) {
+//                mm = value;
+//                best = idx;
+//            }
+//            //System.out.println(value);
+//        }
+//        return best;
+//    }
 
     public boolean gameEnd() {
         return win(Constant.X) || win(Constant.O) || possibleMoves().length == 0;

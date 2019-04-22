@@ -1,5 +1,6 @@
 package app.ui;
 
+import app.model.Computer;
 import app.model.Position;
 import app.vendor.Constant;
 
@@ -20,6 +21,7 @@ public class GameUI extends JFrame {
     private JPanel pnGameArea, pnScore, pnSelectedGame;
 
     private Position position = new Position();
+    private Computer computer = new Computer();
     private int number = Constant.MINIMUM;
     private int round = 1;
     private int scorePlayer, scoreComputer , scoreDraw;
@@ -31,7 +33,6 @@ public class GameUI extends JFrame {
         this.txtComputerWin.setEnabled(false);
         this.txtPlayerWin.setEnabled(false);
         this.txtRound.setEnabled(false);
-        JOptionPane.showMessageDialog(null, "You can choose number of plays at selected option.Let's win computer.");
     }
 
     public GameUI(){
@@ -200,7 +201,8 @@ public class GameUI extends JFrame {
                     button.setText("" + position.getTurn());
                     move(idx);
                     if (!position.gameEnd()) {
-                        int best = position.bestMove();
+                        computer.bestMove(position);
+                        int best = computer.getBestTurn();
                         buttons[best].setEnabled(false);
                         buttons[best].setText("" + position.getTurn());
                         move(best);
