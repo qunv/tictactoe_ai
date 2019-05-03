@@ -24,7 +24,7 @@ public class GameUI extends JFrame {
     private Computer computer = new Computer();
     private int number = Constant.MINIMUM;
     private int round = 1;
-    private int scorePlayer, scoreComputer , scoreDraw;
+    private int scorePlayer, scoreComputer, scoreDraw;
 
     public GameUI(String title) {
         super(title);
@@ -35,7 +35,7 @@ public class GameUI extends JFrame {
         this.txtRound.setEnabled(false);
     }
 
-    public GameUI(){
+    public GameUI() {
         this.number = Constant.MINIMUM;
         this.scoreComputer = 0;
         this.scorePlayer = 0;
@@ -110,7 +110,7 @@ public class GameUI extends JFrame {
         cbGameIndex = new JComboBox<Integer>();
         cbGameIndex.setPreferredSize(new Dimension(50, 20));
         for (int i = 0; i < 5; i++) {
-            cbGameIndex.addItem(2*i + 1);
+            cbGameIndex.addItem(2 * i + 1);
         }
         cbGameIndex.addActionListener(new ActionListener() {
             @Override
@@ -197,15 +197,17 @@ public class GameUI extends JFrame {
 
                 @Override
                 public void mouseClicked(MouseEvent e) {
-                    button.setEnabled(false);
-                    button.setText("" + position.getTurn());
-                    move(idx);
-                    if (!position.gameEnd()) {
-                        computer.bestMove(position);
-                        int best = computer.getBestTurn();
-                        buttons[best].setEnabled(false);
-                        buttons[best].setText("" + position.getTurn());
-                        move(best);
+                    if (!position.duplicationTurn(idx)) {
+                        button.setEnabled(false);
+                        button.setText("" + position.getTurn());
+                        move(idx);
+                        if (!position.gameEnd()) {
+                            computer.bestMove(position);
+                            int best = computer.getBestTurn();
+                            buttons[best].setEnabled(false);
+                            buttons[best].setText("" + position.getTurn());
+                            move(best);
+                        }
                     }
                     if (position.gameEnd()) {
                         String message = "";
@@ -222,7 +224,7 @@ public class GameUI extends JFrame {
                         JOptionPane.showMessageDialog(null, message);
                         continueGame();
                         if (round == number + 1) {
-                            if (scorePlayer - scoreComputer > 0){
+                            if (scorePlayer - scoreComputer > 0) {
                                 message = "Congratulations, You win!";
                             } else if (scorePlayer - scoreComputer < 0) {
                                 message = "Too bad, Computer win!";
@@ -241,7 +243,7 @@ public class GameUI extends JFrame {
     }
 
     private void continueGame() {
-        round+=1;
+        round += 1;
         txtPlayerWin.setText(String.valueOf(scorePlayer));
         txtComputerWin.setText(String.valueOf(scoreComputer));
         txtDraw.setText(String.valueOf(scoreDraw));

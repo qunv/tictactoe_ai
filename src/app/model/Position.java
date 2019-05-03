@@ -46,6 +46,10 @@ public class Position {
         return new Position(newboard, turn == Constant.X ? Constant.O : Constant.X);
     }
 
+    public boolean duplicationTurn(int idx){
+        return board[idx] == ' ' ? false : true;
+    }
+
     public Position reset(){
         return new Position();
     }
